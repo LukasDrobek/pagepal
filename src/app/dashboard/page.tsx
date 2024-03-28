@@ -1,13 +1,14 @@
 import { db } from "@/db";
+import Dashboard from "@/components/Dashboard";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
 const Page = async () => {
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const user = getUser();
 
-  //  Check if user is logging in for the first time
+  // Redirect if user is not logged in
   if (!user || !user.id) redirect("/auth/callback?origin=/dashboard");
 
   const dbUser = await db.user.findFirst({
@@ -16,16 +17,10 @@ const Page = async () => {
     },
   });
 
-  if (!dbUser) {
-    console.log("No DB user found, redirecting...");
-    redirect("/auth-callback?origin=dashboard");
-  }
+  // Redirect if user is not in the db
+  if (!dbUser) redirect("/auth-callback?origin=dashboard");
 
-  return (
-    <div>
-      <h1>{user.email}</h1>
-    </div>
-  );
+  return <Dashboard />;
 };
 
 export default Page;
