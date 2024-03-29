@@ -4,6 +4,7 @@ import Messages from "@/components/chat/Messages";
 import ChatInput from "@/components/chat/ChatInput";
 import { trpc } from "@/app/_trpc/client";
 import { buttonVariants } from "@/components/ui/button";
+import { ChatContextProvider } from "@/components/chat/ChatContext";
 
 import { ChevronLeft, Loader2, XCircle } from "lucide-react";
 import Link from "next/link";
@@ -37,7 +38,7 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
           </div>
         </div>
 
-        <ChatInput isDisabled={isLoading} />
+        <ChatInput isDisabled />
       </div>
     );
   }
@@ -66,19 +67,21 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
           </div>
         </div>
 
-        <ChatInput isDisabled={isLoading} />
+        <ChatInput isDisabled />
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-full bg-zinc-50 flex flex-col justify-between gap-2 divide-y divide-zinc-200">
-      <div className="flex flex-col justify-between flex-1 mb-28">
-        <Messages />
-      </div>
+    <ChatContextProvider fileId={fileId}>
+      <div className="relative min-h-full bg-zinc-50 flex flex-col justify-between gap-2 divide-y divide-zinc-200">
+        <div className="flex flex-col justify-between flex-1 mb-28">
+          <Messages />
+        </div>
 
-      <ChatInput isDisabled={isLoading} />
-    </div>
+        <ChatInput />
+      </div>
+    </ChatContextProvider>
   );
 };
 

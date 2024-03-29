@@ -54,8 +54,8 @@ export const ChatContextProvider = ({
     <ChatContext.Provider
       value={{
         addMessage,
-        message,
         handleInputChange,
+        message,
         isLoading,
       }}
     >
