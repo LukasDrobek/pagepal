@@ -17,6 +17,8 @@ model User {
   stripeSubscriptionEnd DateTime? @map(name: "stripe_subscription_end")
 
   File File[] // Each user can have multiple files
+
+  Message Message[] // Each user can have multiple messages
 }
 
 enum UploadStatus {
@@ -39,4 +41,20 @@ model File {
 
   User   User?   @relation(fields: [userId], references: [id]) // File relation to User
   userId String?
+
+  messages Message[] // Each file can have multiple messages
+}
+
+model Message {
+  id            String  @id @default(uuid())
+  text          String  @db.Text()
+  isUserMessage Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User    @relation(fields: [userId], references: [id])
+  userId String
+  File   File?   @relation(fields: [fileId], references: [id])
+  fileId String?
 }
