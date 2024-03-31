@@ -7,7 +7,8 @@ import { ChatContext } from "@/components/chat/ChatContext";
 
 import { Loader2, MessageSquare } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
+import { useIntersection } from "@mantine/hooks";
 
 const Messages = ({ fileId }: { fileId: string }) => {
   // Fetch messages from the database
@@ -25,6 +26,22 @@ const Messages = ({ fileId }: { fileId: string }) => {
 
   // Handle loading state
   const { isLoading: isAIThinking } = useContext(ChatContext);
+
+  // Intersection message ref
+  const lastMessageRef = useRef<HTMLDivElement>(null);
+
+  // Intersection observer
+  const { ref, entry } = useIntersection({
+    root: lastMessageRef.current,
+    threshold: 1,
+  });
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      // Load more messages
+      fetchNextPage();
+    }
+  }, [entry, fetchNextPage]);
 
   const messages = data?.pages.flatMap((page) => page.messages).flat() ?? [];
   const loadingMessage = {
@@ -56,6 +73,7 @@ const Messages = ({ fileId }: { fileId: string }) => {
           return (
             <Message
               key={msg.id}
+              ref={ref}
               message={msg}
               isMessageSameUser={isMessageSameUser}
             />
@@ -85,7 +103,7 @@ const Messages = ({ fileId }: { fileId: string }) => {
     );
 
   return (
-    <div className="flex flex-col-reverse flex-1 gap-4 p-3 max-h-[calc(100vh - 3.5rem - 7rem)] border-zinc-200 overflow-y-auto scrollbar-thumb scrollbar-thumb-rounded scrollbar-track-lighter scrollbar-w-2">
+    <div className="flex max-h-[calc(100vh-3.5rem-7rem)] border-zinc-200 flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto scrollbar-thumb scrollbar-thumb-rounded scrollbar-track-lighter scrollbar-w-2">
       {renderedMessages}
     </div>
   );

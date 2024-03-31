@@ -4,15 +4,20 @@ import { Icons } from "@/components/Icons";
 
 import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
+import { forwardRef } from "react";
 
 interface MessageProps {
   message: ExtendedMessage;
   isMessageSameUser: boolean;
 }
 
-const Message = ({ message, isMessageSameUser }: MessageProps) => {
+const Message = forwardRef<HTMLDivElement, MessageProps>(function Message(
+  { message, isMessageSameUser },
+  ref
+) {
   return (
     <div
+      ref={ref}
       className={cn("flex items-end", {
         "justify-end": message.isUserMessage,
       })}
@@ -50,7 +55,9 @@ const Message = ({ message, isMessageSameUser }: MessageProps) => {
         >
           {typeof message.text === "string" ? (
             <ReactMarkdown
-              className={cn("prose", { "text-zinc-50": message.isUserMessage })}
+              className={cn("prose", {
+                "text-zinc-50": message.isUserMessage,
+              })}
             >
               {message.text}
             </ReactMarkdown>
@@ -71,6 +78,6 @@ const Message = ({ message, isMessageSameUser }: MessageProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default Message;
