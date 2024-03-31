@@ -17,7 +17,7 @@ export async function getUserSubscriptionPlan() {
       ...PLANS[0],
       isSubscribed: false,
       isCanceled: false,
-      stripeCurrentPeriodEnd: null,
+      stripeSubscriptionEnd: null,
     };
   }
 
@@ -32,7 +32,7 @@ export async function getUserSubscriptionPlan() {
       ...PLANS[0],
       isSubscribed: false,
       isCanceled: false,
-      stripeCurrentPeriodEnd: null,
+      stripeSubscriptionEnd: null,
     };
   }
 
