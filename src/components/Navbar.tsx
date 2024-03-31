@@ -38,6 +38,7 @@ const Navbar = () => {
               <RegisterLink
                 className={buttonVariants({
                   size: "sm",
+                  className: "text-white",
                 })}
               >
                 Get started <ArrowRight className="ml-1.5 h-5 w-5" />
