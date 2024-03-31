@@ -1,6 +1,10 @@
 import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
 import { db } from "@/db";
+import { absoluteUrl } from "@/lib/utils";
 import { privateProcedure, publicProcedure, router } from "@/trpc/trpc";
+import { getUserSubscriptionPlan } from "@/lib/stripe";
+import { stripe } from "@/lib/stripe";
+import { PLANS } from "@/config/stripe";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { TRPCError } from "@trpc/server";
@@ -149,6 +153,56 @@ export const appRouter = router({
         nextCursor,
       };
     }),
+
+  createStripeSession: privateProcedure.mutation(async ({ ctx }) => {
+    const { userId } = ctx;
+
+    if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+    // Fetch the user from the db
+    const dbUser = await db.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!dbUser) throw new TRPCError({ code: "NOT_FOUND" });
+
+    const billingUrl = absoluteUrl("/dashboard/billing");
+
+    // Check if the user is subscribed
+    const subsctiptionPlan = await getUserSubscriptionPlan();
+
+    // Redirect customers to the billing management page
+    if (subsctiptionPlan.isSubscribed && dbUser.stripeCustomerId) {
+      const stripeSession = await stripe.billingPortal.sessions.create({
+        customer: dbUser.stripeCustomerId,
+        return_url: billingUrl,
+      });
+
+      return { url: stripeSession.url };
+    }
+
+    // Create a new checkout session
+    const stripeSession = await stripe.checkout.sessions.create({
+      success_url: billingUrl,
+      cancel_url: billingUrl,
+      payment_method_types: ["card", "paypal"],
+      mode: "subscription",
+      billing_address_collection: "auto",
+      line_items: [
+        {
+          price: PLANS.find((p) => p.name === "Premium")?.price.priceIds.test,
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        userId,
+      },
+    });
+
+    return { url: stripeSession.url };
+  }),
 });
 
 export type AppRouter = typeof appRouter;
