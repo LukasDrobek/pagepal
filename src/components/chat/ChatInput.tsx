@@ -13,7 +13,10 @@ const ChatInput = ({ isDisabled }: { isDisabled?: boolean }) => {
 
   return (
     <div className="absolute bottom-0 left-0 w-full">
-      <form className="mx-2 flex-row gap-3 md:mx-4 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
+      <form
+        className="mx-2 flex-row gap-3 md:mx-4 lg:mx-auto lg:max-w-2xl xl:max-w-3xl"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="relative flex flex-1 items-stretch h-full md:flex-col">
           <div className="relative flex flex-col flex-grow w-full p-4">
             <div className="relative">

@@ -1,3 +1,4 @@
+import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
 import { db } from "@/db";
 import { privateProcedure, publicProcedure, router } from "@/trpc/trpc";
 
@@ -95,6 +96,58 @@ export const appRouter = router({
       if (!file) return { status: "PENDING" as const };
 
       return { status: file.uploadStatus };
+    }),
+
+  getFileMessages: privateProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).nullish(),
+        cursor: z.string().nullish(),
+        fileId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { userId } = ctx;
+      const { cursor, fileId } = input;
+      const limit = input.limit ?? INFINITE_QUERY_LIMIT;
+
+      const file = await db.file.findFirst({
+        where: {
+          id: fileId,
+          userId,
+        },
+      });
+
+      if (!file) throw new TRPCError({ code: "NOT_FOUND" });
+
+      const messages = await db.message.findMany({
+        where: {
+          fileId,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          text: true,
+          createdAt: true,
+          isUserMessage: true,
+        },
+        cursor: cursor ? { id: cursor } : undefined,
+        take: limit + 1,
+      });
+
+      let nextCursor: typeof cursor | undefined = undefined;
+
+      if (messages.length > limit) {
+        const nextMessage = messages.pop();
+        nextCursor = nextMessage?.id;
+      }
+
+      return {
+        messages,
+        nextCursor,
+      };
     }),
 });
 
