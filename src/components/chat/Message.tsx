@@ -13,7 +13,7 @@ interface MessageProps {
 const Message = ({ message, isMessageSameUser }: MessageProps) => {
   return (
     <div
-      className={cn("flex items-center", {
+      className={cn("flex items-end", {
         "justify-end": message.isUserMessage,
       })}
     >
@@ -44,8 +44,8 @@ const Message = ({ message, isMessageSameUser }: MessageProps) => {
             "bg-green-600 text-white": message.isUserMessage,
             "bg-gray-200 text-gray-900": !message.isUserMessage,
             // Conditional corner rounding
-            // "rounded-br-none": isMessageSameUser && message.isUserMessage,
-            // "rounded-bl-none": isMessageSameUser && !message.isUserMessage,
+            "rounded-br-none": !isMessageSameUser && message.isUserMessage,
+            "rounded-bl-none": !isMessageSameUser && !message.isUserMessage,
           })}
         >
           {typeof message.text === "string" ? (

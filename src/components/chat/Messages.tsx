@@ -2,9 +2,12 @@
 
 import { trpc } from "@/app/_trpc/client";
 import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
-import { Loader2, MessageSquare } from "lucide-react";
 import Message from "@/components/chat/Message";
+import { ChatContext } from "@/components/chat/ChatContext";
+
+import { Loader2, MessageSquare } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
+import { useContext } from "react";
 
 const Messages = ({ fileId }: { fileId: string }) => {
   // Fetch messages from the database
@@ -20,6 +23,9 @@ const Messages = ({ fileId }: { fileId: string }) => {
       }
     );
 
+  // Handle loading state
+  const { isLoading: isAIThinking } = useContext(ChatContext);
+
   const messages = data?.pages.flatMap((page) => page.messages).flat() ?? [];
   const loadingMessage = {
     id: "loading-message",
@@ -32,7 +38,10 @@ const Messages = ({ fileId }: { fileId: string }) => {
     isUserMessage: false,
   };
 
-  const combinedMessages = [...(true ? [loadingMessage] : []), ...messages];
+  const combinedMessages = [
+    ...(isAIThinking ? [loadingMessage] : []),
+    ...messages,
+  ];
 
   const renderedMessages =
     combinedMessages && combinedMessages.length ? (
@@ -76,7 +85,7 @@ const Messages = ({ fileId }: { fileId: string }) => {
     );
 
   return (
-    <div className="flex flex-col-reverse flex-1 gap-4 p-3 max-h-[calc(100vh - 3.5rem - 7rem) border-zinc-200 overflow-y-auto scrollbar-thumb scrollbar-thumb-rounded scrollbar-track-lighter scrollbar-w-2 scrolling-touch">
+    <div className="flex flex-col-reverse flex-1 gap-4 p-3 max-h-[calc(100vh - 3.5rem - 7rem)] border-zinc-200 overflow-y-auto scrollbar-thumb scrollbar-thumb-rounded scrollbar-track-lighter scrollbar-w-2">
       {renderedMessages}
     </div>
   );
