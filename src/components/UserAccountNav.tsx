@@ -6,12 +6,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Icons } from "@/components/Icons";
+
 import Image from "next/image";
-import { Icons } from "./Icons";
 import Link from "next/link";
-import { FilePieChart, Gem, Settings } from "lucide-react";
+import { FilePieChart, Gem, LogOut, Settings } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface UserAccountNavProps {
@@ -90,7 +91,13 @@ const UserAccountNav = async ({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className="cursor-pointer">
-          <LogoutLink>Log out</LogoutLink>
+          <Link
+            href="/sign-out"
+            className="flex items-center justify-between w-full"
+          >
+            Log out
+            <LogOut className="h-6 w-6 mr-2 pr-2 text-zinc-500" />
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
