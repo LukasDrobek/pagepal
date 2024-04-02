@@ -97,8 +97,6 @@ const Page = () => {
               {plan}
             </h3>
             <p className="text-gray-500">{tagline}</p>
-            {/* <p className="mt-5 font-display text-6xl font-semibold">${price}</p>
-          <p className="text-gray-500">per month</p> */}
             <div className="flex items-end justify-center gap-2.5 mt-5">
               <div className="font-display text-6xl font-semibold">
                 ${price}

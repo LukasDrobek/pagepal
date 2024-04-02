@@ -137,20 +137,3 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
 };
 
 export default MobileNav;
-
-// <div
-//   className={cn(
-//     "fixed inset-0 z-0 w-full transition-transform duration-300 ease-in-out",
-//     {
-//       "transform translate-y-0": isOpen,
-//       "transform -translate-y-full": !isOpen,
-//     }
-//   )}
-// >
-
-// <div
-//   className={cn("fixed inset-0 z-0 w-full", {
-//     "animate-in slide-in-from-top-5 fade-in-20": isOpen,
-//     "animate-out slide-out-to-top-5 fade-out-20": !isOpen,
-//   })}
-// >
