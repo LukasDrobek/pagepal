@@ -32,7 +32,8 @@ export default function Home() {
           href="/dashboard"
           target="_blank"
         >
-          Get started <ArrowRight className="ml-2 w-5 h-5" />
+          <p className="text-white">Get started</p>
+          <ArrowRight className="ml-2 w-5 h-5" />
         </Link>
       </MaxWidthWrapper>
 

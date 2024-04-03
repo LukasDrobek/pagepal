@@ -60,7 +60,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                 </li>
 
                 {/* Visual separator */}
-                <li className="my-3 h-px w-full bg-gray-300" />
+                <li className="my-3 h-px w-full bg-gray-300 border-t border-b border-transparent" />
 
                 <li>
                   <Link
@@ -77,9 +77,8 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                   </Link>
                 </li>
 
-                {/* FIX: Why is this separator rendered so thin? */}
                 {/* Visual separator */}
-                <li className="my-3 h-px w-full bg-gray-300" />
+                <li className="my-3 h-px w-full bg-gray-300 border-t border-b border-transparent" />
 
                 <li>
                   <Link

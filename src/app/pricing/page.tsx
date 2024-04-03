@@ -176,7 +176,9 @@ const Page = () => {
                   className: "w-full",
                 })}
               >
-                {user ? "Upgrade now" : "Sign in to upgrade"}
+                <p className="text-white">
+                  {user ? "Upgrade now" : "Sign in to upgrade"}
+                </p>
                 <ArrowRight className="h-5 w-5 ml-1.5" />
               </Link>
             ) : user ? (
@@ -186,7 +188,9 @@ const Page = () => {
                 href="/sign-in"
                 className={buttonVariants({ className: "w-full" })}
               >
-                {user ? "Upgrade now" : "Sign in to upgrade"}
+                <p className="text-white">
+                  {user ? "Upgrade now" : "Sign in to upgrade"}
+                </p>
                 <ArrowRight className="h-5 w-5 ml-1.5" />
               </Link>
             )}

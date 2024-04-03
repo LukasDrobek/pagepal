@@ -41,7 +41,13 @@ const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
 
   return (
     <MaxWidthWrapper className="max-w-5xl">
-      <form className="mt-12" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="mt-12"
+        onSubmit={(e) => {
+          e.preventDefault();
+          createSession();
+        }}
+      >
         <Card>
           <CardHeader>
             <CardTitle>Subscription Plan</CardTitle>
