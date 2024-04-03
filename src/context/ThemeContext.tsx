@@ -25,7 +25,10 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const value: ThemeContextType = {
     theme,
     color,
-    changeTheme: (theme: "light" | "dark") => setTheme(theme),
+    changeTheme: (theme: "light" | "dark") => {
+      setTheme(theme);
+      console.log("THEME", theme);
+    },
     changeColor: (
       color: "yellow" | "orange" | "rose" | "red" | "green" | "blue" | "violet"
     ) => setColor(color),
