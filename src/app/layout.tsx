@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
-import Provider from "@/components/Provider";
+import Providers from "@/components/Providers";
 import { Toaster } from "@/components/ui/toaster";
 import { constructMetadata } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <Provider>
+      <Providers>
         <body
           className={cn(
             "min-h-screen font-sans antialiased grainy",
@@ -33,7 +33,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </body>
-      </Provider>
+      </Providers>
     </html>
   );
 }

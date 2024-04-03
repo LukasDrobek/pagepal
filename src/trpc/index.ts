@@ -66,6 +66,13 @@ export const appRouter = router({
         },
       });
 
+      // Delete related messages
+      await db.message.deleteMany({
+        where: {
+          fileId: input.id,
+        },
+      });
+
       return file;
     }),
 

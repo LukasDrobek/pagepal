@@ -3,7 +3,7 @@
 import { trpc } from "@/app/_trpc/client";
 import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
 import Message from "@/components/chat/Message";
-import { ChatContext } from "@/components/chat/ChatContext";
+import { ChatContext } from "@/context/ChatContext";
 
 import { Loader2, MessageSquare } from "lucide-react";
 import Skeleton from "react-loading-skeleton";

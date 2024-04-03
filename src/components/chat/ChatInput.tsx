@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 import { Send } from "lucide-react";
 import { useContext, useRef } from "react";
-import { ChatContext } from "@/components/chat/ChatContext";
+import { ChatContext } from "@/context/ChatContext";
 
 const ChatInput = ({ isDisabled }: { isDisabled?: boolean }) => {
   const { addMessage, handleInputChange, message, isLoading } =

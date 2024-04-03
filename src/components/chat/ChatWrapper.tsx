@@ -4,7 +4,7 @@ import Messages from "@/components/chat/Messages";
 import ChatInput from "@/components/chat/ChatInput";
 import { trpc } from "@/app/_trpc/client";
 import { buttonVariants } from "@/components/ui/button";
-import { ChatContextProvider } from "@/components/chat/ChatContext";
+import { ChatContextProvider } from "@/context/ChatContext";
 
 import { ChevronLeft, Loader2, XCircle } from "lucide-react";
 import Link from "next/link";
