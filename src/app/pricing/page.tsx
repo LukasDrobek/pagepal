@@ -176,9 +176,7 @@ const Page = () => {
                   className: "w-full",
                 })}
               >
-                <p className="text-white">
-                  {user ? "Upgrade now" : "Sign in to upgrade"}
-                </p>
+                {user ? "Upgrade now" : "Sign in to upgrade"}
                 <ArrowRight className="h-5 w-5 ml-1.5" />
               </Link>
             ) : user ? (
