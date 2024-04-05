@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { useContext } from "react";
-import { Check, Moon, Sun } from "lucide-react";
+import { Check, Moon, ShieldAlert, Sun } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/tooltip";
 
 import { useEffect } from "react";
+import ProductionWarning from "@/components/ProductionWarning";
 
 const Page = () => {
   const { changeTheme, changeColor } = useContext(ThemeContext);
@@ -38,12 +39,14 @@ const Page = () => {
     );
     document.documentElement.classList.add(color);
   }, [color]);
-
+  console.log("color", color);
   return (
     <MaxWidthWrapper>
       <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200">
+        {/* FIX and remove for produciton */}
+        <ProductionWarning />
+
         <h1 className="mb-3 font-bold text-5xl text-gray-900">Settings</h1>
-        <Button>Click me</Button>
       </div>
 
       {/* Theme */}

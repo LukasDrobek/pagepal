@@ -26,7 +26,8 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(function Message(
         className={cn(
           "relative flex items-center justify-center h-6 w-6 aspect-square",
           {
-            "order-2 bg-green-600 rounded-sm": message.isUserMessage,
+            // COLOR CHANGE
+            "order-2 bg-blue-600 rounded-sm": message.isUserMessage,
             "order-1 bg-zinc-800 rounded-sm": !message.isUserMessage,
             invisible: isMessageSameUser,
           }
@@ -46,7 +47,8 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(function Message(
       >
         <div
           className={cn("px-4 py-3 rounded-lg inline-block", {
-            "bg-green-600 text-white": message.isUserMessage,
+            // COLOR CHANGE
+            "bg-blue-600 text-white": message.isUserMessage,
             "bg-gray-200 text-gray-900": !message.isUserMessage,
             // Conditional corner rounding
             "rounded-br-none": !isMessageSameUser && message.isUserMessage,
@@ -67,7 +69,8 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(function Message(
           {message.id !== "loading-message" ? (
             <div
               className={cn("text-xs select-none mt-2 w-full text-right", {
-                "text-green-200": message.isUserMessage,
+                // COLOR CHANGE
+                "text-blue-200": message.isUserMessage,
                 "text-zinc-500": !message.isUserMessage,
               })}
             >

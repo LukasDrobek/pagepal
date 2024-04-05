@@ -82,12 +82,14 @@ const Page = () => {
         <div
           key={plan}
           className={cn("relative rounded-2xl bg-white shadow-lg", {
-            "border-2 border-green-600 shadow-blue-200": plan === "Premium",
+            // COLOR CHANGE
+            "border-2 border-blue-500 shadow-blue-200": plan === "Premium",
             "border border-gray-200": plan === "Free",
           })}
         >
           {plan === "Premium" && (
-            <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-green-400 to-teal-500 px-3 py-2 text-sm font-medium text-white">
+            // COLOR CHANGE
+            <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 px-3 py-2 text-sm font-medium text-white">
               Upgrade now
             </div>
           )}

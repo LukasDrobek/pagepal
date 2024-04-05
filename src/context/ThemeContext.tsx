@@ -20,7 +20,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [color, setColor] = useState<
     "yellow" | "orange" | "rose" | "red" | "green" | "blue" | "violet"
-  >("green");
+  >("blue");
 
   const value: ThemeContextType = {
     theme,
