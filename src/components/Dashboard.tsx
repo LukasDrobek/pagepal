@@ -46,7 +46,7 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
         >
           <Link href={`/dashboard/${file.id}`} className="flex flex-col gap-2">
             <div className="pt-6 px-6 flex w-full items-center justify-between space-x-6">
-              <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-tr from-green-400 to-teal-500" />
+              <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-tr from-sky-300 to-blue-500" />
               <div className="flex-1 truncate">
                 <div className="flex items-center space-x-3">
                   <h3 className="truncate text-lg font-medium">{file.name}</h3>

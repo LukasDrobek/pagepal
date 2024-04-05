@@ -89,7 +89,7 @@ const Page = () => {
         >
           {plan === "Premium" && (
             // COLOR CHANGE
-            <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 px-3 py-2 text-sm font-medium text-white">
+            <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-sky-300 to-blue-500 px-3 py-2 text-sm font-medium text-white">
               Upgrade now
             </div>
           )}
