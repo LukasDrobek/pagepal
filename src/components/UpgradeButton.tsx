@@ -7,7 +7,6 @@ import { ArrowRight } from "lucide-react";
 const UpgradeButton = () => {
   const { mutate: createSession } = trpc.createStripeSession.useMutation({
     onSuccess: ({ url }) => {
-      console.log(url);
       window.location.href = url ?? "/dashboard/billing";
     },
   });
