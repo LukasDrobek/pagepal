@@ -26,7 +26,8 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
       <div className="relative min-h-full bg-zinc-50 flex justify-between flex-col gap-2 divide-y divide-zinc-200">
         <div className="flex justify-center items-center flex-col flex-1 mb-28">
           <div className="flex items-center flex-col gap-2">
-            <Loader2 className="h-8 w-8 text-green-600 animate-spin" />
+            {/* COLOR CHANGE */}
+            <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
             <h3 className="font-semibold text-xl">
               {isLoading ? "Loading..." : "Processing..."}
             </h3>
