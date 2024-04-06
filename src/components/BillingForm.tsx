@@ -53,23 +53,30 @@ const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
             <CardTitle>Subscription Plan</CardTitle>
             <CardDescription>
               You are currently on the{" "}
-              <span className="text-semibold">{subscriptionPlan.name}</span>
+              <span className="font-semibold">
+                {subscriptionPlan.name ?? "Free"}
+              </span>{" "}
               plan.
             </CardDescription>
           </CardHeader>
 
           <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
-            <Button type="submit" className="text-white">
+            <Button
+              type="submit"
+              className="text-white flex items-center gap-2"
+            >
               {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
               {isSubscribed ? "Manage Subscription" : "Get Premium"}
             </Button>
 
             {isSubscribed && (
-              <p className="rounded-full text-xs font-medium">
+              <p className="rounded-full text-sm font-medium">
                 {isCanceled
-                  ? "Your plan is cancelled"
-                  : "Your plan will be renewed"}
-                {format(stripeSubscriptionEnd!, "dd.MMM, yyyy")}.
+                  ? "Your plan is cancelled: "
+                  : "Your plan will be renewed: "}
+                <span className="text-base ml-1">
+                  {format(stripeSubscriptionEnd!, "dd MMM, yyyy")}
+                </span>
               </p>
             )}
           </CardFooter>

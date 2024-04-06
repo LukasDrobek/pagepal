@@ -12,7 +12,7 @@ import { Icons } from "@/components/Icons";
 
 import Image from "next/image";
 import Link from "next/link";
-import { FilePieChart, Gem, LogOut, Settings } from "lucide-react";
+import { CreditCard, FilePieChart, Gem, LogOut, Settings } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface UserAccountNavProps {
@@ -72,7 +72,10 @@ const UserAccountNav = async ({
 
         <DropdownMenuItem asChild>
           {subscriptionPlan.isSubscribed ? (
-            <Link href="/dashboard/billing">Manage Subscription</Link>
+            <Link href="/dashboard/billing">
+              <CreditCard className="h-6 w-6 mr-2 pr-2 text-zinc-500 border-r-2 border-zinc-300" />{" "}
+              Manage Subscription
+            </Link>
           ) : (
             <Link href="/pricing">
               <Gem className="h-6 w-6 mr-2 pr-2 text-zinc-500 border-r-2 border-zinc-300" />{" "}
