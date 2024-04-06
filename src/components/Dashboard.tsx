@@ -70,7 +70,7 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
               className="w-full"
               size="sm"
               variant="destructive"
-              onClick={() => deleteFile({ id: file.id })}
+              onClick={() => deleteFile({ id: file.id, key: file.key })}
             >
               {currentlyDeletingFile === file.id ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

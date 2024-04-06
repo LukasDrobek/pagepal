@@ -5,6 +5,7 @@ import { privateProcedure, publicProcedure, router } from "@/trpc/trpc";
 import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { stripe } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
+import { utapi } from "@/app/api/uploadthing/server";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { TRPCError } from "@trpc/server";
@@ -48,9 +49,10 @@ export const appRouter = router({
   }),
 
   deleteFile: privateProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ id: z.string(), key: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { userId } = ctx;
+
       const file = db.file.findFirst({
         where: {
           id: input.id,
@@ -72,6 +74,9 @@ export const appRouter = router({
           fileId: input.id,
         },
       });
+
+      // Delete file from uploadthing
+      const res = await utapi.deleteFiles(input.key);
 
       return file;
     }),
