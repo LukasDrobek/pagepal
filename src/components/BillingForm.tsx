@@ -72,8 +72,8 @@ const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
             {isSubscribed && (
               <p className="rounded-full text-sm font-medium">
                 {isCanceled
-                  ? "Your plan is cancelled: "
-                  : "Your plan will be renewed: "}
+                  ? "Your plan will be cancelled on: "
+                  : "Your plan will be renewed on: "}
                 <span className="text-base ml-1">
                   {format(stripeSubscriptionEnd!, "dd MMM, yyyy")}
                 </span>
