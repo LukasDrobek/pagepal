@@ -5,11 +5,17 @@ import ChatInput from "@/components/chat/ChatInput";
 import { trpc } from "@/app/_trpc/client";
 import { buttonVariants } from "@/components/ui/button";
 import { ChatContextProvider } from "@/context/ChatContext";
+import { PLANS } from "@/config/stripe";
 
 import { ChevronLeft, Loader2, XCircle } from "lucide-react";
 import Link from "next/link";
 
-const ChatWrapper = ({ fileId }: { fileId: string }) => {
+interface ChatWrapperProps {
+  fileId: string;
+  isSubscribed: boolean;
+}
+
+const ChatWrapper = ({ fileId, isSubscribed }: ChatWrapperProps) => {
   const { data, isLoading } = trpc.getFileUploadStatus.useQuery(
     {
       fileId,
@@ -29,7 +35,7 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
             {/* COLOR CHANGE */}
             <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
             <h3 className="font-semibold text-xl">
-              {isLoading ? "Loading..." : "Processing..."}
+              {isLoading ? "Loading..." : "Processing PDF..."}
             </h3>
             <p className="text-zinc-500 text-sm">
               {isLoading
@@ -52,8 +58,15 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
             <XCircle className="h-8 w-8 text-red-500" />
             <h3 className="font-semibold text-xl">PDF size limit exceeded</h3>
             <p className="text-zinc-500 text-sm">
-              Your <span className="font-medium">Free plan</span> suppports up
-              to 5 pages.
+              Your{" "}
+              <span className="font-medium">
+                {isSubscribed ? "Pro" : "Free"}
+              </span>{" "}
+              plan supports up to{" "}
+              {isSubscribed
+                ? PLANS.find((p) => p.name === "Pro")?.pagesPerPdf
+                : PLANS.find((p) => p.name === "Free")?.pagesPerPdf}{" "}
+              pages per PDF.
             </p>
             <Link
               href="/dashboard"

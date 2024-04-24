@@ -79,6 +79,9 @@ const onUploadComplete = async ({
           uploadStatus: "FAILED",
         },
       });
+
+      // Stop the execution if the user exceeded their plan
+      return;
     }
 
     // Vectorize the PDF
