@@ -10,8 +10,6 @@ import { utapi } from "@/app/api/uploadthing/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { Pinecone } from "@pinecone-database/pinecone";
-import { getPineconeClient } from "@/lib/pinecone";
 
 // Main TRPC router
 export const appRouter = router({

@@ -62,7 +62,8 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
             </div>
 
             <div className="flex items-center gap-2">
-              <MessageSquare className="h-4 w-4" />-
+              <MessageSquare className="h-4 w-4" />
+              {/* TODO: Add message count */}
             </div>
 
             <Button
